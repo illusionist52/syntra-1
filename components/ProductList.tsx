@@ -1,46 +1,53 @@
-import { View, Text, FlatList, TouchableOpacity } from 'react-native'
-import React from 'react'
-import ProductItem from './ProductItem'
-import { StyleSheet } from 'react-native'
-import { Colors } from '@/constants/Colors'
-import { ProductType } from '@/types/type'
+import { Colors } from "@/constants/Colors";
+import { ProductType } from "@/types/type";
+import React from "react";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import ProductItem from "./ProductItem";
 
 type Props = {
   products: ProductType[];
-  flatlist: boolean
+  flatlist: boolean;
 };
 
-export default function ProductList({products, flatlist=true}: Props) {
+export default function ProductList({ products, flatlist = true }: Props) {
   return (
     <View style={styles.container}>
-            <View style={styles.titleWrapper}>
-              <Text style={styles.title}>For you</Text>
-              <TouchableOpacity>
-                <Text style={styles.titleBtn}>See all</Text>
-              </TouchableOpacity>
+      <View style={styles.titleWrapper}>
+        <Text style={styles.title}>For you</Text>
+        <TouchableOpacity>
+          <Text style={styles.titleBtn}>See all</Text>
+        </TouchableOpacity>
+      </View>
+      {flatlist ? (
+        <FlatList
+          data={products}
+          numColumns={2}
+          columnWrapperStyle={{
+            justifyContent: "space-between",
+            marginBottom: 20,
+          }}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ index, item }) => (
+            <ProductItem item={item} index={index} productType="regular" />
+          )}
+        />
+      ) : (
+        <View style={styles.itemWrapper}>
+          {products.map((item, index) => (
+            <View style={styles.productWrapper} key={index}>
+              <ProductItem item={item} index={index} productType="regular" />
             </View>
-            {flatlist ? (<FlatList
-              data={products}
-              numColumns={2}
-              columnWrapperStyle={{
-                justifyContent: "space-between",
-                marginBottom: 20,
-              }}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ index, item }) => (
-                <ProductItem item={item} index={index} />
-              )}
-            />): (
-              <View style={styles.itemWrapper}>
-                {products.map((item,index)=>(
-                  <View style={styles.productWrapper} key={index}>
-                    <ProductItem item={item} index={index}/>
-                  </View>
-                ))}
-              </View>
-            )}
-          </View>
-  )
+          ))}
+        </View>
+      )}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -71,15 +78,15 @@ const styles = StyleSheet.create({
     color: Colors.black,
     letterSpacing: 0.6,
   },
-  productWrapper:{
-    width:'50%',
-    paddingLeft:5,
-    marginBottom:20
+  productWrapper: {
+    width: "50%",
+    paddingLeft: 5,
+    marginBottom: 20,
   },
-  itemWrapper:{
-    width:'100%',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems:'stretch'
-  }
+  itemWrapper: {
+    width: "100%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "stretch",
+  },
 });

@@ -15,13 +15,20 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 type Props = {
   item: ProductType;
   index: number;
+  productType: "sale" | "regular";
 };
 
 const width = Dimensions.get("window").width - 40;
 
-export default function ProductItem({ item, index }: Props) {
+export default function ProductItem({ item, index, productType }: Props) {
   return (
-    <Link href={`/product-details/${item.id}` as any} asChild>
+    <Link
+      href={{
+        pathname: "/product-details/[id]",
+        params: { id: item.id, productType: productType },
+      }}
+      asChild
+    >
       <TouchableOpacity>
         <Animated.View
           entering={FadeInDown.delay(300 + index * 100).duration(500)}
