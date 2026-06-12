@@ -64,14 +64,13 @@ export default function FlashSale({ products }: Props) {
       <View style={styles.titleWrapper}>
         <View style={styles.timerWrapper}>
           <Text style={styles.title}>Flash Sale</Text>
-          <View>
+          <View style={{flexDirection:"row", gap:4}}>
             <Ionicons name="time-outline" size={16} color={Colors.black} />
             <Text
               style={styles.timerTxt}
-            >{`${formatTime(timeUnits.days)}:${formatTime(timeUnits.hours)}:${formatTime(timeUnits.minutes)}:${formatTime(timeUnits.seconds)}`}</Text>
+            >{`${formatTime(timeUnits.days)}:${formatTime(timeUnits.hours)}:${formatTime(timeUnits.minutes)}`}</Text>
           </View>
         </View>
-        <Text style={styles.title}>For you</Text>
         <TouchableOpacity>
           <Text style={styles.titleBtn}>See all</Text>
         </TouchableOpacity>

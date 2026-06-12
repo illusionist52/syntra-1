@@ -26,19 +26,18 @@ const ExploreScreen = (props: Props) => {
     <>
       <Stack.Screen options={{ headerShown: true, headerTransparent: true }} />
       <View style={[styles.container, { marginTop: headerHeight }]}>
-        <Text>Explore Screen</Text>
         <FlatList
           data={categories}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
-            <view style={styles.itemWrapper}>
+            <View style={styles.itemWrapper}>
               <Text style={styles.itemTitle}>{item.name}</Text>
               <Image
                 source={{ uri: item.image }}
                 style={{ width: 100, height: 100, borderRadius: 10 }}
               />
-            </view>
+            </View>
           )}
         />
       </View>

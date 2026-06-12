@@ -41,29 +41,29 @@ export default function ProductDetails(props: Props) {
         options={{
           title: "Product Details",
           headerTransparent: true,
-          headerLeft: () => {
+          headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Ionicons name="arrow-back" size={24} color={Colors.black} />;
-            </TouchableOpacity>;
-          },
-          headerRight: () => {
+              <Ionicons name="arrow-back" size={24} color={Colors.black} />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
             <TouchableOpacity onPress={() => router.back()}>
-              <Ionicons name="cart-outline" size={24} color={Colors.black} />;
-            </TouchableOpacity>;
-          },
+              <Ionicons name="cart-outline" size={24} color={Colors.black} />
+            </TouchableOpacity>
+          ),
         }}
       />
-      <ScrollView style={{ marginTop: headerHeight, marginBottom: 90 }}>
-        <View>
+      <ScrollView style={{ marginTop: 90, marginBottom: 90 }}>
+        <View style={{ marginTop: headerHeight }}>
           {product && <ImageSLider imageList={product.images} />}
           {product && (
             <View style={styles.container}>
-              <View>
-                <View>
+              {/* Rating row */}
+              <View style={styles.ratingWrapper}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Ionicons name="star" size={18} color={"#D4AF37"} />
                   <Text style={styles.rating}>
-                    4.7
-                    <Text>{136}</Text>
+                    4.7 <Text>{136}</Text>
                   </Text>
                 </View>
                 <TouchableOpacity>
@@ -74,7 +74,9 @@ export default function ProductDetails(props: Props) {
                   />
                 </TouchableOpacity>
               </View>
-              <Text style={styles.title}>{product.title} </Text>
+
+              <Text style={styles.title}>{product.title}</Text>
+
               <View style={styles.priceWrapper}>
                 <Text style={styles.price}>{product.price}</Text>
                 <View style={styles.priceDiscount}>
@@ -82,9 +84,11 @@ export default function ProductDetails(props: Props) {
                 </View>
                 <Text style={styles.oldPrice}>{product.price + 2}</Text>
               </View>
+
               <Text style={styles.description}>{product.description}</Text>
 
               <View style={styles.productVariationWrapper}>
+                {/* Color */}
                 <View style={styles.productVariationType}>
                   <Text style={styles.productVariationTitle}>Color</Text>
                   <View style={styles.productVariationValueWrapper}>
@@ -129,44 +133,44 @@ export default function ProductDetails(props: Props) {
                     />
                   </View>
                 </View>
+
+                {/* Size */}
                 <View style={styles.productVariationType}>
                   <Text style={styles.productVariationTitle}>Size</Text>
-                  <View
-                    style={[
-                      styles.productVariationSizeValue,
-                      { borderColor: Colors.primary },
-                    ]}
-                  >
-                    <Text
+                  <View style={styles.productVariationValueWrapper}>
+                    <View
                       style={[
-                        styles.productVariationSizeValueText,
-                        { color: Colors.primary, fontWeight: "bold" },
+                        styles.productVariationSizeValue,
+                        { borderColor: Colors.primary },
                       ]}
                     >
-                      S
-                    </Text>
+                      <Text
+                        style={[
+                          styles.productVariationSizeValueText,
+                          { color: Colors.primary, fontWeight: "bold" },
+                        ]}
+                      >
+                        S
+                      </Text>
+                    </View>
+                    <View style={styles.productVariationSizeValue}>
+                      <Text style={styles.productVariationSizeValueText}>M</Text>
+                    </View>
+                    <View style={styles.productVariationSizeValue}>
+                      <Text style={styles.productVariationSizeValueText}>L</Text>
+                    </View>
+                    <View style={styles.productVariationSizeValue}>
+                      <Text style={styles.productVariationSizeValueText}>XL</Text>
+                    </View>
                   </View>
-                  <View style={styles.productVariationSizeValue}>
-                    <Text style={styles.productVariationSizeValueText}>S</Text>
-                  </View>
-                  <View style={styles.productVariationSizeValue}>
-                    <Text style={styles.productVariationSizeValueText}>M</Text>
-                  </View>
-                  <View style={styles.productVariationSizeValue}>
-                    <Text style={styles.productVariationSizeValueText}>L</Text>
-                  </View>
-                  <View style={styles.productVariationSizeValue}>
-                    <Text style={styles.productVariationSizeValueText}>XL</Text>
-                  </View>
-                </View>
-                <View>
-                  <Text></Text>
                 </View>
               </View>
             </View>
           )}
         </View>
       </ScrollView>
+
+      {/* Buttons side by side */}
       <View style={styles.buttonWrapper}>
         <TouchableOpacity
           style={[
@@ -179,7 +183,7 @@ export default function ProductDetails(props: Props) {
           ]}
         >
           <Text style={[styles.buttonText, { color: Colors.primary }]}>
-            Add to cart
+            Add to cart{" "}
             <Ionicons name="cart-outline" size={20} color={Colors.primary} />
           </Text>
         </TouchableOpacity>
@@ -294,16 +298,18 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     position: "absolute",
     height: 90,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
     bottom: 0,
     width: "100%",
     backgroundColor: Colors.white,
+    flexDirection: "row",   // side by side
     gap: 10,
   },
   button: {
     flex: 1,
     flexDirection: "row",
-    color: Colors.primary,
+    backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
     height: 40,
